@@ -1,3 +1,3 @@
 export const SearchGroup = () => {
-  return <>SearchGroup</>;
-};
+	return <>SearchGroup</>
+}
