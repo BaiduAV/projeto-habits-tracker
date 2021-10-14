@@ -7,6 +7,7 @@ import axios from 'axios'
 
 const CreateGroup = () => {
 	const history = useHistory()
+	// eslint-disable-next-line no-unused-vars
 	const [token, setToken] = useState(() => {
 		const localToken = localStorage.getItem('token') || ''
 		return JSON.parse(localToken)
