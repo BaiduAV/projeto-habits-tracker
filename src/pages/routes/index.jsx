@@ -3,7 +3,7 @@ import { Intro } from "../intro";
 import { Signup } from "../signup";
 import { Login } from "../login";
 import { MainPage } from "../mainPage";
-import { CreateGroup } from "../createGroup";
+import { GroupCreation } from "../groupCreation";
 import { SearchGroup } from "../searchGroup";
 import { GroupData } from "../groupData";
 import { Group } from "../group";
@@ -31,7 +31,7 @@ function Routes() {
         <Perfil />
       </Route>
       <Route path="/createGroup">
-        <CreateGroup />
+        <GroupCreation />
       </Route>
       <Route path="/searchGroup">
         <SearchGroup />
