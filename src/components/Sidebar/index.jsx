@@ -18,17 +18,14 @@ export const Sidebar = ({ isOpen, toggle }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to="about" onClick={toggle}>
-            About
+          <SidebarLink to="/mainPage" onClick={toggle}>
+            Main Page
           </SidebarLink>
-          <SidebarLink to="discover" onClick={toggle}>
-            Discover
+          <SidebarLink to="/perfil" onClick={toggle}>
+            Perfil
           </SidebarLink>
-          <SidebarLink to="services" onClick={toggle}>
-            Services
-          </SidebarLink>
-          <SidebarLink to="signup" onClick={toggle}>
-            Sign In
+          <SidebarLink to="/group" onClick={toggle}>
+            Group
           </SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>

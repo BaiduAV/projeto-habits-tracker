@@ -6,6 +6,8 @@ import { MainPage } from "../mainPage";
 import { CreateGroup } from "../createGroup";
 import { SearchGroup } from "../searchGroup";
 import { GroupData } from "../groupData";
+import { Group } from "../group";
+import { Perfil } from "../perfil";
 
 function Routes() {
   return (
@@ -21,6 +23,12 @@ function Routes() {
       </Route>
       <Route path="/mainPage">
         <MainPage />
+      </Route>
+      <Route path="/group">
+        <Group />
+      </Route>
+      <Route path="/perfil">
+        <Perfil />
       </Route>
       <Route path="/createGroup">
         <CreateGroup />
