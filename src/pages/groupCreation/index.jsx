@@ -1,9 +1,7 @@
-import CreateGroup from '../../components/CreateGroup'
-
 export const GroupCreation = () => {
 	return (
 		<>
-			<CreateGroup />
+			<div>Create a Group</div>
 		</>
 	)
 }

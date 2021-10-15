@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import {Button, TextField} from '@mui/material'
 import axios from 'axios'
 import './styles.css'
 
@@ -16,15 +17,15 @@ const GroupSearch = () => {
 		<>
 			<section className='header'>
 				<div>
-					<input
-						type='text'
-						placeholder='Buscar Grupos'
+					<TextField
+						type='search'
+						label='Buscar Grupos'
 						value={text}
 						onChange={(e) => setText(e.target.value)}
 					/>
 				</div>
 				<div>
-					<button onClick={searchGroups}>BUSCAR</button>
+					<Button variant='contained' onClick={searchGroups}>BUSCAR</Button>
 				</div>
 			</section>
 			<section>
