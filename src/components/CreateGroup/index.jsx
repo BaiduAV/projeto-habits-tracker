@@ -44,6 +44,7 @@ const CreateGroup = () => {
 						placeholder='Nome'
 						{...register('name')}
 						error={!!errors.name}
+						helperText={errors.name?.message}
 					/>
 				</div>
 				<div>
@@ -51,6 +52,7 @@ const CreateGroup = () => {
 						placeholder='Descrição'
 						{...register('description')}
 						error={!!errors.description}
+						helperText={errors.description?.message}
 					/>
 				</div>
 				<div>
@@ -58,6 +60,7 @@ const CreateGroup = () => {
 						placeholder='Categoria'
 						{...register('category')}
 						error={!!errors.category}
+						helperText={errors.category?.message}
 					/>
 				</div>
 				<div>
