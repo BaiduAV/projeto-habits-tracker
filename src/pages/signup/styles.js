@@ -17,11 +17,11 @@ export const MainContainer = styled.div`
 export const ContainerTitle = styled.div`
     color: var(--white);
     position: relative;
+    width: fit-content;
     top: 1.5rem;
     left: 2.2rem;
     
     h3 {
-        width: fit-content;
         font-size: 18pt;
     }
 `
