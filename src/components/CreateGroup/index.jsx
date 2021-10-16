@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import {TextField, Button} from '@mui/material'
 import * as yup from 'yup'
 import axios from 'axios'
 
@@ -29,7 +30,7 @@ const CreateGroup = () => {
 	const sendRequest = (data) => {
 		axios
 			.post('https://kenzie-habits.herokuapp.com/groups/', data, config)
-			.then((response) => {
+			.then(() => {
 				history.push('/mainPage')
 			})
 			.catch((e) => console.log(e))
@@ -39,28 +40,28 @@ const CreateGroup = () => {
 		<>
 			<form onSubmit={handleSubmit(sendRequest)}>
 				<div>
-					<input
+					<TextField
 						placeholder='Nome'
 						{...register('name')}
 						error={!!errors.name}
 					/>
 				</div>
 				<div>
-					<input
+					<TextField
 						placeholder='Descrição'
 						{...register('description')}
 						error={!!errors.description}
 					/>
 				</div>
 				<div>
-					<input
+					<TextField
 						placeholder='Categoria'
 						{...register('category')}
 						error={!!errors.category}
 					/>
 				</div>
 				<div>
-					<button type='submit'>CRIAR GRUPO</button>
+					<Button variant='outlined' type='submit'>CRIAR GRUPO</Button>
 				</div>
 			</form>
 		</>
