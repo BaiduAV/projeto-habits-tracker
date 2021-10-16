@@ -1,21 +1,21 @@
 import { useState } from 'react'
-import {Button, TextField} from '@mui/material'
-import axios from 'axios'
-import './styles.css'
+import {TextField} from '@mui/material'
+import api from '../../services/api'
+import {Header, Results, SearchButton, SearchResults} from './styles'
 
 const GroupSearch = () => {
 	const [text, setText] = useState('')
 	const [searchResults, setSearchResults] = useState([])
 
 	const searchGroups = () => {
-		axios
-			.get(`https://kenzie-habits.herokuapp.com/groups/?search=${text}`)
+		api
+			.get(`/groups/?search=${text}`)
 			.then((response) => setSearchResults(response.data.results))
 			.catch((err) => console.log(err))
 	}
 	return (
 		<>
-			<section className='header'>
+			<Header>
 				<div>
 					<TextField
 						type='search'
@@ -25,23 +25,23 @@ const GroupSearch = () => {
 					/>
 				</div>
 				<div>
-					<Button variant='contained' onClick={searchGroups}>BUSCAR</Button>
+					<SearchButton variant='contained' onClick={searchGroups}>BUSCAR</SearchButton>
 				</div>
-			</section>
+			</Header>
 			<section>
 				{searchResults.length > 0 ? (
-					<div className='searchResults'>
+					<SearchResults>
 						{searchResults.map((group, index) => {
 							return (
-								<div key={index} className='results'>
+								<Results key={index}>
 									<p>{group.name}</p>
 									<p>Criador: {group.creator.username}</p>
-									<p>{group.description}</p>
 									<p>{group.users_on_group.length} Membro(s)</p>
-								</div>
+									<p>{group.id}</p>
+								</Results>
 							)
 						})}
-					</div>
+					</SearchResults>
 				) : (
 					<div>NENHUM RESULTADO ENCONTRADO</div>
 				)}

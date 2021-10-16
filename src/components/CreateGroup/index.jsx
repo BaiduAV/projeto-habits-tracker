@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {TextField, Button} from '@mui/material'
 import * as yup from 'yup'
-import axios from 'axios'
+import api from '../../services/api'
 
 const CreateGroup = () => {
 	const history = useHistory()
@@ -28,8 +28,8 @@ const CreateGroup = () => {
 	} = useForm({ resolver: yupResolver(schema) })
 
 	const sendRequest = (data) => {
-		axios
-			.post('https://kenzie-habits.herokuapp.com/groups/', data, config)
+		api
+			.post('/groups/', data, config)
 			.then(() => {
 				history.push('/mainPage')
 			})
