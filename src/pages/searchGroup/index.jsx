@@ -1,3 +1,9 @@
+import GroupSearch from '../../components/GroupSearch'
+
 export const SearchGroup = () => {
-	return <>SearchGroup</>
+	return (
+		<>
+			<GroupSearch />
+		</>
+	)
 }
