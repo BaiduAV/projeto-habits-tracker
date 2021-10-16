@@ -3,11 +3,14 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomizedInput from "../../components/CustomizedInput";
 import { ButtonContainer, ContainerTitle, MainContainer } from "./styles";
-import { Button } from "@mui/material";
+import CustomButton from "../../components/Button";
+import api from "../../services/api";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 export const Signup = () => {
   const schema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
+    username: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido!").required("Campo obrigatório"),
     confirmEmail: yup
       .string()
@@ -23,14 +26,26 @@ export const Signup = () => {
       .required("Campo obrigatório"),
   });
 
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleForm = (data) => {
-    console.log("done")
+  const handleForm = ({username, email, password}) => {
+    const user = {username, email, password}
+    console.log(user)
+    api
+      .post("/users/", user)
+      .then((response) => {
+          toast.success("Conta criada com sucesso!");
+          return history.push("/login");
+      })
+      .catch((err) => {
+          toast.error("Erro ao criar a conta! Verifique suas credenciais e tente novamente.")
+      });
   };
 
   return (
@@ -40,18 +55,13 @@ export const Signup = () => {
       </ContainerTitle>
       <form onSubmit={handleSubmit(handleForm)}>
           <ButtonContainer>
-            <Button 
-              type="submit"
-              variant="contained"
-            >
-                Signup
-            </Button>
+            <CustomButton type="submit"/>
           </ButtonContainer>
           <CustomizedInput
             label="Nome"
             placeholder="Nome"
-            name="name"
-            error={errors.name?.message}
+            name="username"
+            error={errors.username?.message}
             register={register}
           />
           <CustomizedInput

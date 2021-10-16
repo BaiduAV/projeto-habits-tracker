@@ -7,7 +7,6 @@ const StyledInput = styled('input')(`
   width: 200px;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
   line-height: 1.4375em;
   background: rgb(243, 246, 249);
   border: 1px solid #E5E8EC;
