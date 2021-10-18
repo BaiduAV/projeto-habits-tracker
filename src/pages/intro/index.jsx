@@ -1,5 +1,5 @@
 import { useHistory } from "react-router";
-import logo from "../../assets/Group 1.png";
+import logo from "../../assets/intro.png";
 import {
   Container,
   Logo,
