@@ -4,7 +4,7 @@ import { Signup } from "../signup";
 import { Login } from "../login";
 import { MainPage } from "../mainPage";
 import { GroupCreation } from "../groupCreation";
-import { SearchGroup } from "../searchGroup";
+import { Discover } from "../discover";
 import { GroupData } from "../groupData";
 import { Group } from "../group";
 import { Perfil } from "../perfil";
@@ -33,8 +33,8 @@ function Routes() {
       <Route path="/createGroup">
         <GroupCreation />
       </Route>
-      <Route path="/searchGroup">
-        <SearchGroup />
+      <Route path="/discover">
+        <Discover />
       </Route>
       <Route path="/groupData">
         <GroupData />
@@ -43,4 +43,4 @@ function Routes() {
   );
 }
 
-export default Routes
+export default Routes;
