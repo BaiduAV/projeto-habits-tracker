@@ -24,3 +24,12 @@ export const MyHabits = styled.li`
     flex-direction: row;
   }
 `;
+
+export const Button = styled.button`
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--purple);
+  color: var(--red);
+`;

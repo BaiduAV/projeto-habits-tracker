@@ -1,29 +1,28 @@
 import { useState } from "react";
-// import { Calendar } from "react-calendar";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
-import "react-calendar/dist/Calendar.css";
 import background from "../../assets/MainPage.png";
-
 import {
   UserContainer,
   HabitsContainer,
   Container,
   Image,
-  Button,
   HabitsHeader,
 } from "./styles";
 import { HabitsCard } from "../../components/HabitsCard";
 import { Typography } from "@material-ui/core";
-import SimpleDialogDemo from "../../components/PopUp";
+
+import { Popup } from "../../components/PopUp";
 
 export const MainPage = () => {
-  // const [value, onChange] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [habit, setHabit] = useState();
+
   const UserHabits = [
     {
       achieved: true,
-      category: "Sáude",
+      category: "Saúde",
       difficulty: "Fácil",
       frequency: "Diária",
       how_much_achieved: 100,
@@ -33,7 +32,7 @@ export const MainPage = () => {
     },
     {
       achieved: true,
-      category: "Sáude",
+      category: "rotina",
       difficulty: "Fácil",
       frequency: "Diária",
       how_much_achieved: 100,
@@ -43,10 +42,26 @@ export const MainPage = () => {
     },
   ];
 
+  // useEffect(() => {
+  //   api
+  //     .post("/habits/", habit, {
+  //       headers: {
+  //         Authorization: `Bearer: ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {})
+  //     .catch((err) => console.log(err));
+  // }, [habit]);
+
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleSearch = () => {
+    setIsSearch(!isSearch);
+  };
+
+  console.log(habit);
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
@@ -58,24 +73,27 @@ export const MainPage = () => {
             alt="person"
           />
           <h3>Nome</h3>
-          {/* <Button>Search Habit</Button>
-          <Button className="last">Criate Habit</Button> */}
-          <SimpleDialogDemo name="Search Habit" />
-          <SimpleDialogDemo name="Criate Habit" />
+          <Popup
+            name="Hábito"
+            toggleSearch={toggleSearch}
+            isSearch={isSearch}
+            setIsSearch={setIsSearch}
+            setHabit={setHabit}
+          />
         </UserContainer>
+
         <HabitsContainer style={{ backgroundImage: `url(${background})` }}>
           <HabitsHeader>
             <Typography className="first"> Nome </Typography>
             <Typography> Categoria </Typography>
             <Typography> Frequencia </Typography>
             <Typography> Concluido </Typography>
+            <Typography> Excluir </Typography>
           </HabitsHeader>
           {UserHabits.map((habit, index) => (
             <HabitsCard key={index} habit={habit} />
           ))}
         </HabitsContainer>
-
-        {/* <Calendar onChange={onChange} value={value} /> */}
       </Container>
     </>
   );

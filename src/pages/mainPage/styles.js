@@ -19,12 +19,20 @@ export const UserContainer = styled.aside`
   @media screen and (min-width: 686px) {
     box-shadow: 1px 0px 5px 5px rgb(0 0 0 / 64%);
     width: 30%;
+    div {
+      width: 100%;
+    }
   }
   h3 {
     padding: 10px;
   }
   .last {
     margin-bottom: 80%;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -41,21 +49,49 @@ export const HabitsContainer = styled.ul`
   }
 `;
 
+export const CreatePopup = styled.form`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  z-index: 999;
+  width: 70vw;
+  height: 50vh;
+  background: var(--purple);
+
+  top: 0;
+  left: 0;
+  transition: 0.3 ease-in-out;
+  opacity: ${({ search }) => (search ? "100%" : "0")};
+  top: ${({ search }) => (search ? "0" : "-100%")};
+  transform: translate(20%, 50%);
+
+  label {
+    font-weight: bold;
+  }
+
+  @media screen and (min-width: 686px) {
+    width: 50vw;
+    height: 50vh;
+    transform: translate(50%, 50%);
+  }
+`;
+
 export const HabitsHeader = styled.div`
   display: none;
 
   @media screen and (min-width: 686px) {
     height: 7%;
     width: 100%;
-    background: var(--purple);
+    background-color: var(--purple);
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    box-shadow: 8px 0px 5px 5px rgb(0 0 0 / 64%);
+    box-shadow: 9px 2px 5px 5px rgb(0 0 0 / 64%);
 
-    /* border-bottom: 1px solid var(--black); */
     .first {
-      margin: 0 11% 0 8%;
+      margin: 0 8% 0 4%;
     }
   }
 `;
@@ -69,24 +105,3 @@ export const Image = styled.img`
     height: 40%;
   }
 `;
-
-// export const Button = styled.button`
-//   border-radius: 8px;
-//   background-color: var(--white);
-//   font-size: 18px;
-//   padding: 1rem;
-//   margin: 8% 15%;
-//   border: none;
-//   color: var(--black);
-//   transition: all 0.2s ease-ease-in-out;
-
-//   &:hover {
-//     background-color: var(--black);
-//     color: var(--purple);
-//     transition: all 0.2s ease-ease-in-out;
-//   }
-//   @media screen and (min-width: 686px) {
-//     margin: 8% 15% 5% 15%;
-//     padding: 18px 36px;
-//   }
-// `;

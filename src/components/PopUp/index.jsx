@@ -1,56 +1,63 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import { DialogTitle, Dialog, Typography } from "@material-ui/core";
-import { useState } from "react";
-import { Button } from "./styles";
+import { Button, CreatePopup, ContainerBtn } from "./styles";
+import { useForm } from "react-hook-form";
+import CustomizedInput from "../CustomizedInput";
 
-function SimpleDialog(props) {
-  const { onClose, filterhabit, open } = props;
+export const Popup = ({ name, toggleSearch, isSearch, setHabit }) => {
+  const { register, handleSubmit } = useForm();
 
-  const handleClose = () => {
-    onClose(filterhabit);
-  };
-
-  const handleListItemClick = (value) => {
-    onClose(value);
+  const handleForm = (data) => {
+    const { name, frequency, difficulty, category } = data;
+    setHabit({
+      title: name,
+      category: category,
+      difficulty: difficulty,
+      frequency: frequency,
+      achieved: false,
+      how_much_achieved: 0,
+      user: "user_id", //depende da api
+    });
+    toggleSearch();
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
-    </Dialog>
-  );
-}
+    <>
+      <CreatePopup
+        onSubmit={handleSubmit(handleForm)}
+        search={isSearch}
+        toggle={toggleSearch}
+      >
+        <h2>Criar {name}</h2>
+        <CustomizedInput
+          placeholder="Nome"
+          title="Nome"
+          name="name"
+          register={register}
+        />
+        <CustomizedInput
+          placeholder="Categoria"
+          title="Categoria"
+          name="category"
+          register={register}
+        />
+        <CustomizedInput
+          placeholder="Dificuldadeoria"
+          title="Dificuldade"
+          name="difficulty"
+          register={register}
+        />
+        <CustomizedInput
+          placeholder="Frequencia"
+          title="Frequencia"
+          name="frequency"
+          register={register}
+        />
 
-SimpleDialog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
+        <ContainerBtn>
+          <Button type="submit">Criar</Button>
+          <Button onClick={() => toggleSearch()}>Voltar</Button>
+        </ContainerBtn>
+      </CreatePopup>
+      <Button onClick={() => toggleSearch()}>Novo Hábito</Button>
+    </>
+  );
 };
-
-export default function SimpleDialogDemo() {
-  const [open, setOpen] = React.useState(false);
-  const [filterhabit, setFilterHabit] = useState([]);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value) => {
-    setOpen(false);
-    setFilterHabit(value);
-  };
-
-  return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        search habit
-      </Button>
-      <SimpleDialog
-        selectedValue={setFilterHabit}
-        open={open}
-        onClose={handleClose}
-      />
-    </div>
-  );
-}
