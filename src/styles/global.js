@@ -18,4 +18,5 @@ export default createGlobalStyle`
         --gray: #666360;
         --purple: #6C63FF;
         --red: #d63638;
+        --darkpurple:#5856d6
     }`;
