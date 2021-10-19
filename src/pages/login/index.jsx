@@ -4,9 +4,13 @@ import CustomizedInput from "../../components/CustomizedInput";
 import api from "../../services/api";
 import { MainContainer, ContainerTitle, ButtonContainer} from "./styles";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 
 export const Login = () => {
+
+  const history = useHistory();
 
   const { register, handleSubmit, formState: {errors} } = useForm();
 
@@ -18,9 +22,10 @@ export const Login = () => {
           localStorage.setItem(`@Tracker:Token`, JSON.stringify(access));
           const userID = jwt_decode(access).user_id;
           localStorage.setItem(`@Tracker:User`, JSON.stringify(userID));
-          console.log("logou")
+          toast.success("Sucesso ao logar!")
+          return history.push("/mainPage")
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Verifique as suas credenciais e tente novamente"));
   }
 
   return (
