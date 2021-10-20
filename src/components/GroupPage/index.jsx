@@ -5,12 +5,6 @@ import { MainContent } from "./styles";
 
 const GroupPage = () => {
   const [selectedGroup, setSelectedGroup] = useState({});
-  // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useState(() => {
-    const localToken = localStorage.getItem("token") || "";
-    return JSON.parse(localToken);
-  });
-  const config = { headers: { Authorization: `Bearer ${token}` } };
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,48 +13,6 @@ const GroupPage = () => {
       .then((response) => setSelectedGroup(response.data))
       .catch((err) => console.log(err));
   });
-
-  const enterAGroup = (id) => {
-    api
-      .post(`/groups/${id}/subscribe`, config)
-      .then((response) => response.data)
-      .catch((err) => console.log(err));
-  };
-
-  const exitAGroup = (id) => {
-    api
-      .delete(`/groups/${id}/unsubscribe`, config)
-      .then((response) => response.data)
-      .catch((err) => console.log(err));
-  };
-
-  const createActivity = (data) => {
-    api
-      .post("/activities/", config, data)
-      .then((r) => console.log(r))
-      .catch((err) => console.log(err));
-  };
-
-  const createGoal = (data) => {
-    api
-      .post("/goals/", config, data)
-      .then((r) => console.log(r))
-      .catch((err) => console.log(err));
-  };
-
-  const updateGoal = (data, goalId) => {
-    api
-      .post(`/activities/${goalId}`, config, data)
-      .then((r) => console.log(r))
-      .catch((err) => console.log(err));
-  };
-
-  const updateActivity = (data, activityId) => {
-    api
-      .post(`/activities/${activityId}`, config, data)
-      .then((r) => console.log(r))
-      .catch((err) => console.log(err));
-  };
 
   return (
     <MainContent>

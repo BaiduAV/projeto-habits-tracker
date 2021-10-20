@@ -1,9 +1,7 @@
 import { useForm } from "react-hook-form";
 import CustomButton from "../../components/Button"
 import CustomizedInput from "../../components/CustomizedInput";
-import api from "../../services/api";
 import { MainContainer, ContainerTitle, ButtonContainer} from "./styles";
-import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import { useUser } from "../../providers/User";
 
@@ -17,15 +15,8 @@ export const Login = () => {
   const { register, handleSubmit, formState: {errors} } = useForm();
 
   const handleForm = (data) => {
-    api
-      .post("/sessions/", data)
-      .then((response) => {
-          const { access } = response.data;
-          userLogin(access);
-          toast.success("Sucesso ao logar!")
-          return history.push("/mainPage")
-      })
-      .catch((err) => toast.error("Verifique as suas credenciais e tente novamente"));
+        userLogin(data);
+        return history.push("/mainPage")
   }
 
   return (
