@@ -12,7 +12,7 @@ import {
 import { HabitsCard } from "../../components/HabitsCard";
 import { Typography } from "@material-ui/core";
 
-import { Popup } from "../../components/PopUp";
+import { Popup } from "../../components/PopUpMain";
 
 export const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);

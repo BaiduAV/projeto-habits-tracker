@@ -34,7 +34,7 @@ export const CreatePopup = styled.form`
 
   @media screen and (min-width: 686px) {
     width: 30vw;
-    height: 50vh;
+    height: 400px;
     transform: translate(120%, 50%);
   }
 `;
@@ -65,6 +65,6 @@ export const ContainerBtn = styled.section`
   width: 100%;
   justify-content: space-evenly;
   @media screen and (min-width: 686px) {
-    width: 70%;
+    width: 100%;
   }
 `;
