@@ -8,7 +8,7 @@ import background from "../../assets/criate_group.svg";
 export const Group = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  const [habit, setHabit] = useState();
+  const [setHabit] = useState();
 
   const toggle = () => {
     setIsOpen(!isOpen);

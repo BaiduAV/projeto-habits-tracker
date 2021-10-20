@@ -1,4 +1,5 @@
 import React from "react";
+import { useUser } from "../../providers/User";
 import {
   SidebarContainer,
   Icon,
@@ -11,6 +12,8 @@ import {
 } from "./styles";
 
 export const Sidebar = ({ isOpen, toggle }) => {
+  const { userLogoff } = useUser();
+
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
@@ -29,7 +32,7 @@ export const Sidebar = ({ isOpen, toggle }) => {
           </SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>
-          <SidebarRoute to="/" onClick={toggle}>
+          <SidebarRoute to="/" onClick={userLogoff}>
             Deslogar
           </SidebarRoute>
         </SideBtnWrap>
