@@ -1,19 +1,9 @@
-import './App.css';
+import Routes from "./pages/routes";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Isso é só o começo</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes />
     </div>
   );
 }
