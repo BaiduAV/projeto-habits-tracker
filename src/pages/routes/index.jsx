@@ -3,11 +3,9 @@ import { Intro } from "../intro";
 import { Signup } from "../signup";
 import { Login } from "../login";
 import { MainPage } from "../mainPage";
-import { GroupCreation } from "../groupCreation";
 import { Discover } from "../discover";
 import { GroupData } from "../groupData";
 import { Group } from "../group";
-import { Perfil } from "../perfil";
 
 function Routes() {
   return (
@@ -26,12 +24,6 @@ function Routes() {
       </Route>
       <Route path="/group">
         <Group />
-      </Route>
-      <Route path="/perfil">
-        <Perfil />
-      </Route>
-      <Route path="/createGroup">
-        <GroupCreation />
       </Route>
       <Route path="/discover">
         <Discover />

@@ -14,7 +14,6 @@ import {
 } from "./styles";
 
 export const Navbar = ({ toggle }) => {
-
   const { userLogoff } = useUser();
 
   return (
@@ -27,21 +26,18 @@ export const Navbar = ({ toggle }) => {
           </MobileIcon>
           <NavMenu>
             <NavItem>
-              <NavLinks to="/mainPage">Main Page</NavLinks>
+              <NavLinks to="/mainPage">Pagina Principal</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="/perfil">Perfil</NavLinks>
+              <NavLinks to="/group">Meus Groupos</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="/group">Group</NavLinks>
+              <NavLinks to="/discover">Descubra Grupos</NavLinks>
             </NavItem>
           </NavMenu>
           <NavBtn>
-            <NavBtnLink 
-              to="/"
-              onClick={userLogoff}
-            >
-              Sign out
+            <NavBtnLink to="/" onClick={userLogoff}>
+              Deslogar
             </NavBtnLink>
           </NavBtn>
         </NavbarContainer>
