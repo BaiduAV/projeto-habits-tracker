@@ -3,12 +3,14 @@ import CustomButton from "../../components/Button"
 import CustomizedInput from "../../components/CustomizedInput";
 import api from "../../services/api";
 import { MainContainer, ContainerTitle, ButtonContainer} from "./styles";
-import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
+import { useUser } from "../../providers/User";
 
 
 export const Login = () => {
+
+  const { userLogin } = useUser()
 
   const history = useHistory();
 
@@ -19,9 +21,7 @@ export const Login = () => {
       .post("/sessions/", data)
       .then((response) => {
           const { access } = response.data;
-          localStorage.setItem(`@Tracker:Token`, JSON.stringify(access));
-          const userID = jwt_decode(access).user_id;
-          localStorage.setItem(`@Tracker:User`, JSON.stringify(userID));
+          userLogin(access);
           toast.success("Sucesso ao logar!")
           return history.push("/mainPage")
       })

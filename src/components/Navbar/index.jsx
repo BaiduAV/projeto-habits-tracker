@@ -1,5 +1,6 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
+import { useUser } from "../../providers/User";
 import {
   Nav,
   NavbarContainer,
@@ -13,6 +14,9 @@ import {
 } from "./styles";
 
 export const Navbar = ({ toggle }) => {
+
+  const { userLogoff } = useUser();
+
   return (
     <>
       <Nav>
@@ -33,7 +37,12 @@ export const Navbar = ({ toggle }) => {
             </NavItem>
           </NavMenu>
           <NavBtn>
-            <NavBtnLink to="/">Sign out</NavBtnLink>
+            <NavBtnLink 
+              to="/"
+              onClick={userLogoff}
+            >
+              Sign out
+            </NavBtnLink>
           </NavBtn>
         </NavbarContainer>
       </Nav>
