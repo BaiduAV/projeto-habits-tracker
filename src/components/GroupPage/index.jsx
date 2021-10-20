@@ -5,7 +5,6 @@ import { MainContent } from "./styles";
 
 const GroupPage = () => {
   const [selectedGroup, setSelectedGroup] = useState({});
-  // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
 
   useEffect(() => {

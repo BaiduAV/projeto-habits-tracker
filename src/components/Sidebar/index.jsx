@@ -12,9 +12,8 @@ import {
 } from "./styles";
 
 export const Sidebar = ({ isOpen, toggle }) => {
-
   const { userLogoff } = useUser();
-  
+
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
@@ -22,19 +21,19 @@ export const Sidebar = ({ isOpen, toggle }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to="/mainPage" onClick={toggle}>
+          <SidebarLink to="/Pagina Principal" onClick={toggle}>
             Main Page
           </SidebarLink>
-          <SidebarLink to="/perfil" onClick={toggle}>
-            Perfil
-          </SidebarLink>
           <SidebarLink to="/group" onClick={toggle}>
-            Group
+            Meus Grupos
+          </SidebarLink>
+          <SidebarLink to="/discover" onClick={toggle}>
+            Descubra Grupos
           </SidebarLink>
         </SidebarMenu>
         <SideBtnWrap>
           <SidebarRoute to="/" onClick={userLogoff}>
-            Sign out
+            Deslogar
           </SidebarRoute>
         </SideBtnWrap>
       </SidebarWrapper>
