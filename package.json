@@ -56,7 +56,6 @@
     ]
   },
   "devDependencies": {
-    "@mui/core": "^5.0.0-alpha.51",
     "prettier": "2.4.1"
   }
 }

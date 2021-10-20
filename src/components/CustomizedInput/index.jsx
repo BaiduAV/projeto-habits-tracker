@@ -1,9 +1,9 @@
-import { InputUnstyled } from "@mui/core"
+import { InputUnstyled } from "@mui/core";
 import { styled } from "@mui/system";
-import React from "react"
+import React from "react";
 import { Container } from "./styles";
 
-const StyledInput = styled('input')(`
+const StyledInput = styled("input")(`
   width: 200px;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
@@ -27,24 +27,24 @@ const StyledInput = styled('input')(`
   }
 `);
 
+const CustomInput = React.forwardRef(function CustomInput(props, ref) {
+  return (
+    <InputUnstyled components={{ Input: StyledInput }} {...props} ref={ref} />
+  );
+});
 
-const CustomInput = React.forwardRef(function CustomInput (props, ref) {
-    return (
-        <InputUnstyled components={{ Input: StyledInput }} {...props} ref={ref}/>
-    )
-})
-
-export default function CustomizedInput({label, name, register, error = "", ...rest}) {
-    return (
+export default function CustomizedInput({
+  label,
+  name,
+  register,
+  error = "",
+  ...rest
+}) {
+  return (
     <Container isErrored={!!error}>
-        <div>
-            {label}
-        </div>
-        <CustomInput 
-            {...rest}
-            {...register(name)}
-        />
-        {!!error && <span>{error}</span>}
+      <div>{label}</div>
+      <CustomInput {...rest} {...register(name)} />
+      {!!error && <span>{error}</span>}
     </Container>
-    )
+  );
 }
