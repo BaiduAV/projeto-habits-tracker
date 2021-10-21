@@ -28,7 +28,7 @@ function Routes() {
       <Route path="/discover">
         <Discover />
       </Route>
-      <Route path="/groupData">
+      <Route path="/groupData/:id">
         <GroupData />
       </Route>
     </Switch>
