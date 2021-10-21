@@ -1,4 +1,4 @@
-import { CardActions, IconButton, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import {
   Results,
@@ -7,7 +7,6 @@ import {
   CardContainer,
   Hidden,
 } from "./styles";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 const DiscoveryPage = ({ searchResults, hasSearched, text, setText }) => {
   const history = useHistory();
@@ -24,19 +23,11 @@ const DiscoveryPage = ({ searchResults, hasSearched, text, setText }) => {
             {searchResults.map((group, index) => {
               return (
                 <Results key={index}>
-                  <CardContainer>
+                  <CardContainer onClick={() => seeDetails(group.id)}>
                     <Typography>{group.name}</Typography>
                     <Hidden>Criador: {group.creator.username}</Hidden>
                     <Hidden> {group.users_on_group.length} Membro(s)</Hidden>
                   </CardContainer>
-                  <CardActions>
-                    <IconButton
-                      sx={{ color: "#FFF" }}
-                      onClick={() => seeDetails(group.id)}
-                    >
-                      <ArrowForwardIosRoundedIcon />
-                    </IconButton>
-                  </CardActions>
                 </Results>
               );
             })}

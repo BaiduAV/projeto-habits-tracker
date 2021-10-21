@@ -1,12 +1,18 @@
 import api from "../../services/api";
 import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { MainContent } from "./styles";
+import {
+  MainContent,
+  GroupContent,
+  Members,
+  Goals,
+  Activities,
+  GroupDetails,
+} from "./styles";
+import { useParams } from "react-router-dom";
 
 const GroupPage = () => {
   const [selectedGroup, setSelectedGroup] = useState({});
   const { id } = useParams();
-  const history = useHistory();
 
   useEffect(() => {
     api
@@ -17,38 +23,42 @@ const GroupPage = () => {
 
   return (
     <MainContent>
-      <div>
-        <h1>{selectedGroup.name}</h1>
-        <p>Categoria: {selectedGroup.category}</p>
-      </div>
-      <div>
-        <p>{selectedGroup.description}</p>
-      </div>
-      <div>
-        Usuários no grupo:
-        {selectedGroup.users_on_group !== undefined &&
-          selectedGroup.users_on_group.map((item, index) => (
-            <p key={index}>{item.username}</p>
-          ))}
-      </div>
-      <div>
-        Goals:
-        {selectedGroup.users_on_group !== undefined &&
-          selectedGroup.goals.map((item, index) => (
-            <p key={index}>{item.title}</p>
-          ))}
-      </div>
-      <div>
-        Activities:
-        {selectedGroup.users_on_group !== undefined &&
-          selectedGroup.activities.map((item, index) => (
-            <p key={index}>{item.title}</p>
-          ))}
-      </div>
-      <div>
-        <button>ENTRAR NO GRUPO</button>
-        <button onClick={() => history.push("/discover")}>VOLTAR</button>
-      </div>
+      <GroupContent>
+        <h2>{selectedGroup.name}</h2>
+        <p>
+          <strong>Categoria:</strong> {selectedGroup.category}
+        </p>
+
+        <div>
+          <p>
+            <strong> Descrição: </strong>
+            {selectedGroup.description}
+          </p>
+        </div>
+      </GroupContent>
+      <GroupDetails>
+        <Members>
+          <strong>Usuários no grupo:</strong>
+          {selectedGroup.users_on_group !== undefined &&
+            selectedGroup.users_on_group.map((item, index) => (
+              <p key={index}>{item.username}</p>
+            ))}
+        </Members>
+        <Goals>
+          <strong>Goals:</strong>
+          {selectedGroup.users_on_group !== undefined &&
+            selectedGroup.goals.map((item, index) => (
+              <p key={index}>{item.title}</p>
+            ))}
+        </Goals>
+        <Activities>
+          <strong>Activities:</strong>
+          {selectedGroup.users_on_group !== undefined &&
+            selectedGroup.activities.map((item, index) => (
+              <p key={index}>{item.title}</p>
+            ))}
+        </Activities>
+      </GroupDetails>
     </MainContent>
   );
 };
