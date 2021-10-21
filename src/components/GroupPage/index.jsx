@@ -1,11 +1,12 @@
 import api from "../../services/api";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router-dom";
 import { MainContent } from "./styles";
 
 const GroupPage = () => {
   const [selectedGroup, setSelectedGroup] = useState({});
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     api
@@ -46,6 +47,7 @@ const GroupPage = () => {
       </div>
       <div>
         <button>ENTRAR NO GRUPO</button>
+        <button onClick={() => history.push("/discover")}>VOLTAR</button>
       </div>
     </MainContent>
   );
