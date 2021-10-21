@@ -6,53 +6,59 @@ import { toast } from "react-toastify";
 export const UserContext = createContext([]);
 
 export const UserProvider = ({ children }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("@Tracker:Token")) || {}
+  );
+  // eslint-disable-next-line no-unused-vars
+  const [userId, setUserId] = useState(
+    JSON.parse(localStorage.getItem("@Tracker:User")) || 0
+  );
 
-    // eslint-disable-next-line no-unused-vars
-    const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem("@Tracker:Token")) || {}
-    );
+  const [token, setToken] = useState("");
 
-    const [token, setToken] = useState("");
+  const auth = { headers: { Authorization: `Bearer ${user}` } };
 
-    const auth = { headers: { Authorization: `Bearer ${token}` } };
+  const setUserToken = (token) => {
+    localStorage.setItem(`@Tracker:Token`, JSON.stringify(token));
+    const userID = jwt_decode(token).user_id;
+    localStorage.setItem(`@Tracker:User`, JSON.stringify(userID));
+    setToken(JSON.stringify(token));
+  };
 
-    const setUserToken = (token) => {
-        localStorage.setItem(`@Tracker:Token`, JSON.stringify(token));
-        const userID = jwt_decode(token).user_id;
-        localStorage.setItem(`@Tracker:User`, JSON.stringify(userID));
-        setToken(JSON.stringify(token))
-    }
+  const userLogin = (userData) => {
+    api
+      .post("/sessions/", userData)
+      .then((response) => {
+        const { access } = response.data;
+        setUserToken(access);
+        toast.success("Sucesso ao logar!");
+      })
+      .catch((err) =>
+        toast.error("Verifique as suas credenciais e tente novamente")
+      );
+  };
 
-    const userLogin = (userData) => {
-        api
-            .post("/sessions/", userData)
-            .then((response) => {
-                const { access } = response.data;
-                setUserToken(access)
-                toast.success("Sucesso ao logar!")
-            })
-            .catch((err) => toast.error("Verifique as suas credenciais e tente novamente"));
-    };
+  const userLogoff = () => {
+    localStorage.removeItem(`@Tracker:Token`);
+    localStorage.removeItem(`@Tracker:User`);
+    setToken("");
+  };
 
-    const userLogoff = () => {
-        localStorage.removeItem(`@Tracker:Token`);
-        localStorage.removeItem(`@Tracker:User`);
-        setToken("");
-    }
-
-    return (
-        <UserContext.Provider
-            value={{ 
-                user,
-                token,
-                auth, 
-                userLogin, 
-                userLogoff,
-             }}
-        >
-            {children}
-        </UserContext.Provider>
-    )
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        token,
+        auth,
+        userId,
+        userLogin,
+        userLogoff,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export const useUser = () => useContext(UserContext);
