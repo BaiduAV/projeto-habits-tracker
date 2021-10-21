@@ -44,6 +44,7 @@ export const GroupDetails = styled.div`
   align-items: center;
   justify-content: center;
   width: 95%;
+  height: 100%;
   margin: 0;
   padding: 0;
   @media screen and (min-width: 686px) {
@@ -62,6 +63,7 @@ export const Members = styled.div`
   margin: 0.5rem;
   border-radius: 8px;
   width: 90%;
+  height: 50%;
   -webkit-box-shadow: 1px 6px 18px 0px rgba(0, 0, 0, 0.64);
   box-shadow: 1px 6px 18px 0px rgba(0, 0, 0, 0.64);
   @media screen and (min-width: 686px) {
@@ -80,6 +82,7 @@ export const Goals = styled.div`
   margin: 0.5rem;
   border-radius: 8px;
   width: 90%;
+  height: 50%;
   -webkit-box-shadow: 1px 6px 18px 0px rgba(0, 0, 0, 0.64);
   box-shadow: 1px 6px 18px 0px rgba(0, 0, 0, 0.64);
   @media screen and (min-width: 686px) {
@@ -98,6 +101,7 @@ export const Activities = styled.div`
   margin: 0.5rem;
   border-radius: 8px;
   width: 90%;
+  height: 50%;
   -webkit-box-shadow: 1px 6px 18px 0px rgba(0, 0, 0, 0.64);
   box-shadow: 1px 6px 18px 0px rgba(0, 0, 0, 0.64);
   @media screen and (min-width: 686px) {

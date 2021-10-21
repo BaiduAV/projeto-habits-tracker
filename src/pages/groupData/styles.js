@@ -98,11 +98,12 @@ export const Button = styled.button`
   background-color: var(--black);
   font-size: 18px;
   padding: 0.5rem;
-  margin: 0.5rem;
+  margin: -1rem;
   border: none;
   color: var(--purple);
   transition: all 0.2s ease-ease-in-out;
   font-weight: bold;
+  width: 107px;
 
   &:hover {
     background-color: var(--white);
@@ -110,6 +111,7 @@ export const Button = styled.button`
     transition: all 0.3s ease-ease-in-out;
   }
   @media screen and (min-width: 686px) {
+    width: 207px;
     padding: 1rem;
   }
 `;

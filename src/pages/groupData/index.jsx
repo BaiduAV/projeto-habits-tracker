@@ -10,6 +10,7 @@ import {
   CreatePopup,
   Button,
 } from "./styles";
+import { useHistory } from "react-router";
 
 export const GroupData = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,8 @@ export const GroupData = () => {
   const [isActivies, setIsActivies] = useState(false);
   // const [criateGoals, setCriateGoals] = useState(false);
   // const [criateActive, setCriateActive] = useState(false);
+
+  const history = useHistory();
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -41,10 +44,7 @@ export const GroupData = () => {
             alt="person"
           />
           <h3>Nome</h3>
-          <div>
-            <Button>Entrar no Grupo</Button>
-          </div>
-
+          <Button>Entrar no Grupo</Button>
           <CreatePopup search={isGoals}>
             <h2>Criar uma atividade</h2>
             <input type="string" placeholder="Nome" />
@@ -65,6 +65,7 @@ export const GroupData = () => {
           </CreatePopup>
 
           <Button onClick={toggleActivies}>Criar Atividades</Button>
+          <Button onClick={() => history.push("/discover")}>Voltar</Button>
         </UserContainer>
         <GroupContent>
           <GroupPage />

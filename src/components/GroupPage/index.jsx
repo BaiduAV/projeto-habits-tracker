@@ -1,6 +1,5 @@
 import api from "../../services/api";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import {
   MainContent,
   GroupContent,
@@ -9,6 +8,7 @@ import {
   Activities,
   GroupDetails,
 } from "./styles";
+import { useParams } from "react-router-dom";
 
 const GroupPage = () => {
   const [selectedGroup, setSelectedGroup] = useState({});
@@ -16,7 +16,7 @@ const GroupPage = () => {
 
   useEffect(() => {
     api
-      .get(`/groups/26/`)
+      .get(`/groups/${id}/`)
       .then((response) => setSelectedGroup(response.data))
       .catch((err) => console.log(err));
   });
