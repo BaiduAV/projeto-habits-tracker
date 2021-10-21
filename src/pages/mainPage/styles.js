@@ -106,3 +106,24 @@ export const Image = styled.img`
     height: 40%;
   }
 `;
+
+export const Button = styled.button`
+  border-radius: 8px;
+  background-color: var(--black);
+  font-size: 18px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  color: var(--purple);
+  transition: all 0.2s ease-ease-in-out;
+  font-weight: bold;
+
+  &:hover {
+    background-color: var(--white);
+    color: var(--purple);
+    transition: all 0.3s ease-ease-in-out;
+  }
+  @media screen and (min-width: 686px) {
+    padding: 1rem;
+  }
+`;
