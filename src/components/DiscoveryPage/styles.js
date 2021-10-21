@@ -77,6 +77,6 @@ export const Results = styled(Card)`
 export const Hidden = styled(Typography)`
   display: none;
   @media screen and (min-width: 686px) {
-    display: block;
+    display: inline;
   }
 `;

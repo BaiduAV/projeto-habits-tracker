@@ -1,3 +1,9 @@
+import GroupPage from "../../components/GroupPage";
+
 export const GroupData = () => {
-  return <>GroupData</>;
+  return (
+    <>
+      <GroupPage />
+    </>
+  );
 };
