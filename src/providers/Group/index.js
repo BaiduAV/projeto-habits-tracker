@@ -34,6 +34,7 @@ export const GroupProvider = ({ children }) => {
   };
 
   const createGoal = (data, id) => {
+    console.log(data)
     api
       .post(
         "/goals/",
