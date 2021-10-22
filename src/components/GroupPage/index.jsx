@@ -19,7 +19,7 @@ const GroupPage = () => {
       .get(`/groups/${id}/`)
       .then((response) => setSelectedGroup(response.data))
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <MainContent>
