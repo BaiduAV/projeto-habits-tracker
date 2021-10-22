@@ -11,12 +11,15 @@ import {
   FormContainer,
 } from "./styles";
 import CustomButton from "../../components/Button";
-import api from "../../services/api";
-import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router";
+import api from "../../services/api";
 import background from "../../assets/signup.svg";
 
 export const Signup = () => {
+
+  const history = useHistory();
+
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido!").required("Campo obrigatório"),
@@ -34,28 +37,21 @@ export const Signup = () => {
       .required("Campo obrigatório"),
   });
 
-  const history = useHistory();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleForm = ({ username, email, password }) => {
-    const user = { username, email, password };
-    console.log(user);
+  const handleForm = ({username, email, password}) => {
+    const user = { username, password, email}
     api
       .post("/users/", user)
       .then((response) => {
-        toast.success("Conta criada com sucesso!");
-        return history.push("/login");
+          toast.success("Conta criada com sucesso!")
+          return history.push("/login")
       })
-      .catch((err) => {
-        toast.error(
-          "Erro ao criar a conta! Verifique suas credenciais e tente novamente."
-        );
-      });
+      .catch((err) => toast.error("Erro ao cadastrar, verifique novamente!"))
   };
 
   return (
