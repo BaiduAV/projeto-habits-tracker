@@ -84,6 +84,7 @@ export const Signup = () => {
             register={register}
           />
           <CustomizedInput
+            type="password"
             label="Senha"
             placeholder="Senha"
             name="password"
@@ -91,6 +92,7 @@ export const Signup = () => {
             register={register}
           />
           <CustomizedInput
+            type="password"
             label="Confirme a senha"
             placeholder="Confirme a senha"
             name="confirmPassword"
