@@ -46,7 +46,7 @@ export const GroupData = () => {
     createActivity(data, id);
   };
 
-  const handleGoal = (goals) => {
+  const handleGoal = (goals, id) => {
     createGoal(goals, id);
   };
 
@@ -59,8 +59,7 @@ export const GroupData = () => {
     setIsActivities(!isActivities);
     setIsGoals(false);
   };
-
-  console.log(goals);
+ 
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
@@ -75,7 +74,7 @@ export const GroupData = () => {
           <Button onClick={() => enterAGroup(id)}>Entrar no Grupo</Button>
           <CreatePopup search={isGoals}>
             <h2>Criar uma meta</h2>
-            <FormContainer onSubmit={handleSubmit(handleGoal)}>
+            <FormContainer>
               <Input
                 type="string"
                 placeholder="Name"
@@ -95,7 +94,7 @@ export const GroupData = () => {
                   setGoals({ ...goals, how_much_achieved: e.target.value })
                 }
               ></Input>
-              <Button type="submit">Enviar</Button>
+              <Button type="submit" onClick={() => handleGoal(goals, id)}>Enviar</Button>
             </FormContainer>
             <Button onClick={toggleGoals}>Voltar</Button>
           </CreatePopup>
