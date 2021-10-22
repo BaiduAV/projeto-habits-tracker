@@ -51,7 +51,7 @@ export const Popup = ({ name, toggleSearch, isSearch }) => {
           <Button onClick={() => toggleSearch()}>Voltar</Button>
         </ContainerBtn>
       </CreatePopup>
-      <Button onClick={() => toggleSearch()}>Novo Hábito</Button>
+      <Button onClick={() => toggleSearch()}>Novo {name}</Button>
     </>
   );
 };
