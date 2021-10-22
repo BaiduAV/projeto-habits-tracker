@@ -2,11 +2,19 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomizedInput from "../../components/CustomizedInput";
-import { ButtonContainer, ContainerTitle, MainContainer } from "./styles";
+import {
+  ButtonContainer,
+  ContainerTitle,
+  MainContainer,
+  ImageContainer,
+  Container,
+  FormContainer,
+} from "./styles";
 import CustomButton from "../../components/Button";
 import api from "../../services/api";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import background from "../../assets/signup.svg";
 
 export const Signup = () => {
   const schema = yup.object().shape({
@@ -34,29 +42,30 @@ export const Signup = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleForm = ({username, email, password}) => {
-    const user = {username, email, password}
-    console.log(user)
+  const handleForm = ({ username, email, password }) => {
+    const user = { username, email, password };
+    console.log(user);
     api
       .post("/users/", user)
       .then((response) => {
-          toast.success("Conta criada com sucesso!");
-          return history.push("/login");
+        toast.success("Conta criada com sucesso!");
+        return history.push("/login");
       })
       .catch((err) => {
-          toast.error("Erro ao criar a conta! Verifique suas credenciais e tente novamente.")
+        toast.error(
+          "Erro ao criar a conta! Verifique suas credenciais e tente novamente."
+        );
       });
   };
 
   return (
     <MainContainer>
-      <ContainerTitle>
-        <h3>Signup</h3>
-      </ContainerTitle>
-      <form onSubmit={handleSubmit(handleForm)}>
-          <ButtonContainer>
-            <CustomButton type="submit"/>
-          </ButtonContainer>
+      <ImageContainer style={{ backgroundImage: `url(${background})` }} />
+      <Container>
+        <ContainerTitle>
+          <h3>Signup</h3>
+        </ContainerTitle>
+        <FormContainer onSubmit={handleSubmit(handleForm)}>
           <CustomizedInput
             label="Nome"
             placeholder="Nome"
@@ -92,7 +101,11 @@ export const Signup = () => {
             error={errors.confirmPassword?.message}
             register={register}
           />
-      </form>
+          <ButtonContainer>
+            <CustomButton type="submit" />
+          </ButtonContainer>
+        </FormContainer>
+      </Container>
     </MainContainer>
   );
 };
