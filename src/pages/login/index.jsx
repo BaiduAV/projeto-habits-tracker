@@ -56,6 +56,7 @@ export const Login = () => {
               register={register}
             />
             <CustomizedInput
+              type="password"
               label="Senha"
               placeholder="Senha"
               name="password"
