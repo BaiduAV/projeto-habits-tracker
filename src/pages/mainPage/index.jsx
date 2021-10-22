@@ -12,19 +12,18 @@ import {
 import { HabitsCard } from "../../components/HabitsCard";
 import { Typography } from "@material-ui/core";
 
-import { Popup } from "../../components/PopUp";
+import { Popup } from "../../components/PopUpMain";
 import { useHabits } from "../../providers/Habits";
 
 export const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-
   const { loadHabits, habits } = useHabits();
 
   useEffect(() => {
-    loadHabits()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [habits])
+    loadHabits();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [habits]);
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -50,7 +49,6 @@ export const MainPage = () => {
             toggleSearch={toggleSearch}
             isSearch={isSearch}
             setIsSearch={setIsSearch}
-
           />
         </UserContainer>
 

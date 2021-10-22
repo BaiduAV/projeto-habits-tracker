@@ -1,31 +1,44 @@
 import { useForm } from "react-hook-form";
 import CustomButton from "../../components/Button";
 import CustomizedInput from "../../components/CustomizedInput";
-import { MainContainer, ContainerTitle, ButtonContainer} from "./styles";
+import {
+  MainContainer,
+  ContainerTitle,
+  Container,
+  FormContainer,
+  ImageContainer,
+} from "./styles";
 import { useUser } from "../../providers/User";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import api from "../../services/api";
-
+import background from "../../assets/MainPage.png";
 
 export const Login = () => {
-
   const history = useHistory();
 
   const { userLogin } = useUser();
 
-  const { register, handleSubmit, formState: {errors} } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleForm = (data) => {
-      api
-        .post("/sessions/", data)
-        .then((response) => {
-            const { access } = response.data
-            userLogin(access);
-            return history.push("/mainPage")
-        })
-        .catch((err) => toast.error("Erro ao criar a conta! Verifique suas credenciais e tente novamente."))
-  }
+    api
+      .post("/sessions/", data)
+      .then((response) => {
+        const { access } = response.data;
+        userLogin(access);
+        return history.push("/mainPage");
+      })
+      .catch((err) =>
+        toast.error(
+          "Erro ao criar a conta! Verifique suas credenciais e tente novamente."
+        )
+      );
+  };
 
   return (
     <MainContainer>
@@ -35,7 +48,6 @@ export const Login = () => {
         </ContainerTitle>
         <FormContainer>
           <form onSubmit={handleSubmit(handleForm)}>
-            <ButtonContainer></ButtonContainer>
             <CustomizedInput
               label="Nome"
               placeholder="Nome"

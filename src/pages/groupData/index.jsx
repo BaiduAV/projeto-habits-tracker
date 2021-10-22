@@ -11,7 +11,8 @@ import {
   Image,
   CreatePopup,
   Button,
-  ButtonContainer,
+  Input,
+  FormContainer,
 } from "./styles";
 import { useHistory } from "react-router";
 import { GroupContext } from "../../providers/Group";
@@ -24,6 +25,12 @@ export const GroupData = () => {
   const [isActivities, setIsActivities] = useState(false);
   const history = useHistory();
   const { id } = useParams();
+  const [goals, setGoals] = useState({
+    title: "",
+    difficulty: "",
+    how_much_achieved: 0,
+    group: id,
+  });
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -39,8 +46,8 @@ export const GroupData = () => {
     createActivity(data, id);
   };
 
-  const handleGoal = (data) => {
-    createGoal(data, id);
+  const handleGoal = (goals) => {
+    createGoal(goals, id);
   };
 
   const toggleGoals = () => {
@@ -53,6 +60,7 @@ export const GroupData = () => {
     setIsGoals(false);
   };
 
+  console.log(goals);
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
@@ -65,52 +73,47 @@ export const GroupData = () => {
           />
           <h3>Nome</h3>
           <Button onClick={() => enterAGroup(id)}>Entrar no Grupo</Button>
-          <CreatePopup search={isGoals} onSubmit={handleSubmit(handleGoal)}>
+          <CreatePopup search={isGoals}>
             <h2>Criar uma meta</h2>
-            <CustomizedInput
-              type="string"
-              placeholder="Nome"
-              name="title"
-              error={errors.title?.message}
-              register={register}
-            />
-            <CustomizedInput
-              type="string"
-              placeholder="Dificuldade"
-              name="difficulty"
-              error={errors.difficulty?.message}
-              register={register}
-            />
-            <CustomizedInput
-              type="string"
-              placeholder="Percentual"
-              name="how_much_achieved"
-              error={errors.how_much_achieved?.message}
-              register={register}
-            />
-            <ButtonContainer>
+            <FormContainer onSubmit={handleSubmit(handleGoal)}>
+              <Input
+                type="string"
+                placeholder="Name"
+                onChange={(e) => setGoals({ ...goals, title: e.target.value })}
+              ></Input>
+              <Input
+                type="string"
+                placeholder="Dificuldade"
+                onChange={(e) =>
+                  setGoals({ ...goals, difficulty: e.target.value })
+                }
+              ></Input>
+              <Input
+                type="string"
+                placeholder="Dificuldade"
+                onChange={(e) =>
+                  setGoals({ ...goals, how_much_achieved: e.target.value })
+                }
+              ></Input>
               <Button type="submit">Enviar</Button>
-              <Button onClick={toggleGoals}>Voltar</Button>
-            </ButtonContainer>
+            </FormContainer>
+            <Button onClick={toggleGoals}>Voltar</Button>
           </CreatePopup>
           <Button onClick={toggleGoals}>Criar Metas</Button>
 
-          <CreatePopup
-            search={isActivities}
-            onSubmit={handleSubmit(handleActivity)}
-          >
+          <CreatePopup search={isActivities}>
             <h2>Criar uma atividade</h2>
-            <CustomizedInput
-              type="string"
-              placeholder="Nome"
-              name="title"
-              error={errors.title?.message}
-              register={register}
-            />
-            <ButtonContainer>
+            <FormContainer onSubmit={handleSubmit(handleActivity)}>
+              <CustomizedInput
+                type="string"
+                placeholder="Nome"
+                name="title"
+                error={errors.title?.message}
+                register={register}
+              />
               <Button type="submit">Enviar</Button>
-              <Button onClick={toggleActivities}>Voltar</Button>
-            </ButtonContainer>
+            </FormContainer>
+            <Button onClick={() => toggleActivities()}>Voltar</Button>
           </CreatePopup>
 
           <Button onClick={toggleActivities}>Criar Atividades</Button>
