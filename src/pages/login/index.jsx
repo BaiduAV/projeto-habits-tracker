@@ -2,21 +2,29 @@ import { useForm } from "react-hook-form";
 import CustomButton from "../../components/Button"
 import CustomizedInput from "../../components/CustomizedInput";
 import { MainContainer, ContainerTitle, ButtonContainer} from "./styles";
-import { useHistory } from "react-router";
 import { useUser } from "../../providers/User";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import api from "../../services/api";
 
 
 export const Login = () => {
 
-  const { userLogin } = useUser()
-
   const history = useHistory();
+
+  const { userLogin } = useUser();
 
   const { register, handleSubmit, formState: {errors} } = useForm();
 
   const handleForm = (data) => {
-        userLogin(data);
-        return history.push("/mainPage")
+      api
+        .post("/sessions/", data)
+        .then((response) => {
+            const { access } = response.data
+            userLogin(access);
+            return history.push("/mainPage")
+        })
+        .catch((err) => toast.error("Erro ao criar a conta! Verifique suas credenciais e tente novamente."))
   }
 
   return (
