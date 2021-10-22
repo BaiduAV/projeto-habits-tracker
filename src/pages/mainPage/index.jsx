@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
 import background from "../../assets/MainPage.png";
@@ -12,46 +12,19 @@ import {
 import { HabitsCard } from "../../components/HabitsCard";
 import { Typography } from "@material-ui/core";
 
-import { Popup } from "../../components/PopUpMain";
+import { Popup } from "../../components/PopUp";
+import { useHabits } from "../../providers/Habits";
 
 export const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
-  const [habit, setHabit] = useState();
 
-  const UserHabits = [
-    {
-      achieved: true,
-      category: "Saúde",
-      difficulty: "Fácil",
-      frequency: "Diária",
-      how_much_achieved: 100,
-      id: 226,
-      title: "Andar de bike",
-      user: 80,
-    },
-    {
-      achieved: true,
-      category: "rotina",
-      difficulty: "Fácil",
-      frequency: "Diária",
-      how_much_achieved: 100,
-      id: 226,
-      title: "Andar de bike",
-      user: 80,
-    },
-  ];
+  const { loadHabits, habits } = useHabits();
 
-  // useEffect(() => {
-  //   api
-  //     .post("/habits/", habit, {
-  //       headers: {
-  //         Authorization: `Bearer: ${token}`,
-  //       },
-  //     })
-  //     .then((response) => {})
-  //     .catch((err) => console.log(err));
-  // }, [habit]);
+  useEffect(() => {
+    loadHabits()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [habits])
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -61,7 +34,6 @@ export const MainPage = () => {
     setIsSearch(!isSearch);
   };
 
-  console.log(habit);
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
@@ -78,7 +50,7 @@ export const MainPage = () => {
             toggleSearch={toggleSearch}
             isSearch={isSearch}
             setIsSearch={setIsSearch}
-            setHabit={setHabit}
+
           />
         </UserContainer>
 
@@ -90,7 +62,7 @@ export const MainPage = () => {
             <Typography> Concluido </Typography>
             <Typography> Excluir </Typography>
           </HabitsHeader>
-          {UserHabits.map((habit, index) => (
+          {habits.map((habit, index) => (
             <HabitsCard key={index} habit={habit} />
           ))}
         </HabitsContainer>
