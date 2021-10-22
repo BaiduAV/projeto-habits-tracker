@@ -34,14 +34,14 @@ export const Popup = ({ name, toggleSearch, isSearch }) => {
           register={register}
         />
         <CustomizedInput
-          placeholder="Dificuldadeoria"
+          placeholder="Dificuldade"
           title="Dificuldade"
           name="difficulty"
           register={register}
         />
         <CustomizedInput
-          placeholder="Frequencia"
-          title="Frequencia"
+          placeholder="Frequência"
+          title="Frequência"
           name="frequency"
           register={register}
         />

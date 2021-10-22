@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import CustomButton from "../../components/Button"
+import CustomButton from "../../components/Button";
 import CustomizedInput from "../../components/CustomizedInput";
 import { MainContainer, ContainerTitle, ButtonContainer} from "./styles";
 import { useUser } from "../../providers/User";
@@ -29,28 +29,34 @@ export const Login = () => {
 
   return (
     <MainContainer>
-      <ContainerTitle>
-        <h3>Login</h3>
-      </ContainerTitle>
-      <form onSubmit={handleSubmit(handleForm)}>
-        <ButtonContainer>
-          <CustomButton type="submit" />
-        </ButtonContainer>
-        <CustomizedInput
-            label="Nome"
-            placeholder="Nome"
-            name="username"
-            error={errors.username?.message}
-            register={register} 
-        />
-        <CustomizedInput 
-            label="Senha"
-            placeholder="Senha"
-            name="password"
-            error={errors.password?.message}
-            register={register}
-        />
-      </form>
+      <Container>
+        <ContainerTitle>
+          <h3>Login</h3>
+        </ContainerTitle>
+        <FormContainer>
+          <form onSubmit={handleSubmit(handleForm)}>
+            <ButtonContainer></ButtonContainer>
+            <CustomizedInput
+              label="Nome"
+              placeholder="Nome"
+              name="username"
+              error={errors.username?.message}
+              register={register}
+            />
+            <CustomizedInput
+              label="Senha"
+              placeholder="Senha"
+              name="password"
+              error={errors.password?.message}
+              register={register}
+            />
+            <CustomButton type="submit" />
+          </form>
+        </FormContainer>
+      </Container>
+      <ImageContainer
+        style={{ backgroundImage: `url(${background})` }}
+      ></ImageContainer>
     </MainContainer>
-  )
+  );
 };

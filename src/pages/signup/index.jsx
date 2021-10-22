@@ -2,11 +2,19 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomizedInput from "../../components/CustomizedInput";
-import { ButtonContainer, ContainerTitle, MainContainer } from "./styles";
+import {
+  ButtonContainer,
+  ContainerTitle,
+  MainContainer,
+  ImageContainer,
+  Container,
+  FormContainer,
+} from "./styles";
 import CustomButton from "../../components/Button";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import api from "../../services/api";
+import background from "../../assets/signup.svg";
 
 export const Signup = () => {
 
@@ -48,13 +56,12 @@ export const Signup = () => {
 
   return (
     <MainContainer>
-      <ContainerTitle>
-        <h3>Signup</h3>
-      </ContainerTitle>
-      <form onSubmit={handleSubmit(handleForm)}>
-          <ButtonContainer>
-            <CustomButton type="submit"/>
-          </ButtonContainer>
+      <ImageContainer style={{ backgroundImage: `url(${background})` }} />
+      <Container>
+        <ContainerTitle>
+          <h3>Signup</h3>
+        </ContainerTitle>
+        <FormContainer onSubmit={handleSubmit(handleForm)}>
           <CustomizedInput
             label="Nome"
             placeholder="Nome"
@@ -90,7 +97,11 @@ export const Signup = () => {
             error={errors.confirmPassword?.message}
             register={register}
           />
-      </form>
+          <ButtonContainer>
+            <CustomButton type="submit" />
+          </ButtonContainer>
+        </FormContainer>
+      </Container>
     </MainContainer>
   );
 };

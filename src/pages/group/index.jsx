@@ -3,7 +3,7 @@ import { Navbar } from "../../components/Navbar";
 import { Popup } from "../../components/PopUpMain";
 import { Sidebar } from "../../components/Sidebar";
 import { Container, UserContainer, GroupContainer, Image } from "./styles";
-import background from "../../assets/criate_group.svg";
+import background from "../../assets/signup.svg";
 
 export const Group = () => {
   const [isOpen, setIsOpen] = useState(false);
