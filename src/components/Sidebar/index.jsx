@@ -21,7 +21,7 @@ export const Sidebar = ({ isOpen, toggle }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to="/Pagina Principal" onClick={toggle}>
+          <SidebarLink to="/Página Principal" onClick={toggle}>
             Main Page
           </SidebarLink>
           <SidebarLink to="/group" onClick={toggle}>

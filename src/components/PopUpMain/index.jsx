@@ -1,21 +1,15 @@
 import { Button, CreatePopup, ContainerBtn } from "./styles";
 import { useForm } from "react-hook-form";
 import CustomizedInput from "../CustomizedInput";
+import { useHabits } from "../../providers/Habits";
 
-export const Popup = ({ name, toggleSearch, isSearch, setHabit }) => {
+export const Popup = ({ name, toggleSearch, isSearch }) => {
   const { register, handleSubmit } = useForm();
 
+  const { createHabit } = useHabits();
+
   const handleForm = (data) => {
-    const { name, frequency, difficulty, category } = data;
-    setHabit({
-      title: name,
-      category: category,
-      difficulty: difficulty,
-      frequency: frequency,
-      achieved: false,
-      how_much_achieved: 0,
-      user: "user_id", //depende da api
-    });
+    createHabit(data);
     toggleSearch();
   };
 
@@ -30,7 +24,7 @@ export const Popup = ({ name, toggleSearch, isSearch, setHabit }) => {
         <CustomizedInput
           placeholder="Nome"
           title="Nome"
-          name="name"
+          name="title"
           register={register}
         />
         <CustomizedInput

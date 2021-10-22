@@ -26,10 +26,10 @@ export const Navbar = ({ toggle }) => {
           </MobileIcon>
           <NavMenu>
             <NavItem>
-              <NavLinks to="/mainPage">Pagina Principal</NavLinks>
+              <NavLinks to="/mainPage">Página Principal</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to="/group">Meus Groupos</NavLinks>
+              <NavLinks to="/group">Meus Grupos</NavLinks>
             </NavItem>
             <NavItem>
               <NavLinks to="/discover">Descubra Grupos</NavLinks>

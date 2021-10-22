@@ -95,8 +95,8 @@ export const GroupData = () => {
                   setGoals({ ...goals, how_much_achieved: e.target.value })
                 }
               ></Input>
+              <Button type="submit">Enviar</Button>
             </FormContainer>
-            <Button type="submit">Enviar</Button>
             <Button onClick={toggleGoals}>Voltar</Button>
           </CreatePopup>
           <Button onClick={toggleGoals}>Criar Metas</Button>

@@ -4,19 +4,20 @@ import CustomizedInput from "../../components/CustomizedInput";
 import {
   MainContainer,
   ContainerTitle,
-  ButtonContainer,
-  ImageContainer,
   Container,
   FormContainer,
+  ImageContainer,
 } from "./styles";
-import { useHistory } from "react-router";
 import { useUser } from "../../providers/User";
-import background from "../../assets/signup.svg";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import api from "../../services/api";
+import background from "../../assets/MainPage.png";
 
 export const Login = () => {
-  const { userLogin } = useUser();
-
   const history = useHistory();
+
+  const { userLogin } = useUser();
 
   const {
     register,
@@ -25,8 +26,18 @@ export const Login = () => {
   } = useForm();
 
   const handleForm = (data) => {
-    userLogin(data);
-    return history.push("/mainPage");
+    api
+      .post("/sessions/", data)
+      .then((response) => {
+        const { access } = response.data;
+        userLogin(access);
+        return history.push("/mainPage");
+      })
+      .catch((err) =>
+        toast.error(
+          "Erro ao criar a conta! Verifique suas credenciais e tente novamente."
+        )
+      );
   };
 
   return (
@@ -37,7 +48,6 @@ export const Login = () => {
         </ContainerTitle>
         <FormContainer>
           <form onSubmit={handleSubmit(handleForm)}>
-            <ButtonContainer></ButtonContainer>
             <CustomizedInput
               label="Nome"
               placeholder="Nome"
