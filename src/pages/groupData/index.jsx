@@ -1,7 +1,9 @@
 import GroupPage from "../../components/GroupPage";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useContext, useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import { Sidebar } from "../../components/Sidebar";
+import CustomizedInput from "../../components/CustomizedInput";
 import {
   UserContainer,
   GroupContent,
@@ -9,28 +11,46 @@ import {
   Image,
   CreatePopup,
   Button,
+  ButtonContainer,
 } from "./styles";
 import { useHistory } from "react-router";
+import { GroupContext } from "../../providers/Group";
+import { useParams } from "react-router-dom";
 
 export const GroupData = () => {
+  const { createActivity, createGoal, enterAGroup } = useContext(GroupContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isGoals, setIsGoals] = useState(false);
-  const [isActivies, setIsActivies] = useState(false);
-  // const [criateGoals, setCriateGoals] = useState(false);
-  // const [criateActive, setCriateActive] = useState(false);
-
+  const [isActivities, setIsActivities] = useState(false);
   const history = useHistory();
+  const { id } = useParams();
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleGoals = () => {
-    setIsGoals(!isGoals);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleActivity = (data) => {
+    createActivity(data, id);
   };
 
-  const toggleActivies = () => {
-    setIsActivies(!isActivies);
+  const handleGoal = (data) => {
+    createGoal(data, id);
+  };
+
+  const toggleGoals = () => {
+    setIsGoals(!isGoals);
+    setIsActivities(false);
+  };
+
+  const toggleActivities = () => {
+    setIsActivities(!isActivities);
+    setIsGoals(false);
   };
 
   return (
@@ -44,27 +64,56 @@ export const GroupData = () => {
             alt="person"
           />
           <h3>Nome</h3>
-          <Button>Entrar no Grupo</Button>
-          <CreatePopup search={isGoals}>
-            <h2>Criar uma atividade</h2>
-            <input type="string" placeholder="Nome" />
-            <input type="string" placeholder="Dificuldade" />
-            <input type="string" placeholder="Percentual" />
-            <Button>Enviar</Button>
-            <Button onClick={toggleGoals}>Voltar</Button>
+          <Button onClick={() => enterAGroup(id)}>Entrar no Grupo</Button>
+          <CreatePopup search={isGoals} onSubmit={handleSubmit(handleGoal)}>
+            <h2>Criar uma meta</h2>
+            <CustomizedInput
+              type="string"
+              placeholder="Nome"
+              name="title"
+              error={errors.title?.message}
+              register={register}
+            />
+            <CustomizedInput
+              type="string"
+              placeholder="Dificuldade"
+              name="difficulty"
+              error={errors.difficulty?.message}
+              register={register}
+            />
+            <CustomizedInput
+              type="string"
+              placeholder="Percentual"
+              name="how_much_achieved"
+              error={errors.how_much_achieved?.message}
+              register={register}
+            />
+            <ButtonContainer>
+              <Button type="submit">Enviar</Button>
+              <Button onClick={toggleGoals}>Voltar</Button>
+            </ButtonContainer>
           </CreatePopup>
           <Button onClick={toggleGoals}>Criar Metas</Button>
 
-          <CreatePopup search={isActivies}>
+          <CreatePopup
+            search={isActivities}
+            onSubmit={handleSubmit(handleActivity)}
+          >
             <h2>Criar uma atividade</h2>
-            <input type="string" placeholder="Nome" />
-            <input type="data" placeholder="Data" />
-
-            <Button type="submit">Enviar</Button>
-            <Button onClick={toggleGoals}>Voltar</Button>
+            <CustomizedInput
+              type="string"
+              placeholder="Nome"
+              name="title"
+              error={errors.title?.message}
+              register={register}
+            />
+            <ButtonContainer>
+              <Button type="submit">Enviar</Button>
+              <Button onClick={toggleActivities}>Voltar</Button>
+            </ButtonContainer>
           </CreatePopup>
 
-          <Button onClick={toggleActivies}>Criar Atividades</Button>
+          <Button onClick={toggleActivities}>Criar Atividades</Button>
           <Button onClick={() => history.push("/discover")}>Voltar</Button>
         </UserContainer>
         <GroupContent>
