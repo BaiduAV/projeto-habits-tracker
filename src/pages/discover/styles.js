@@ -52,6 +52,13 @@ export const BtnContainer = styled.div`
   }
 `;
 
+export const Header = styled.section`
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+  margin-bottom: 15px;
+`;
+
 export const Button = styled.button`
   border-radius: 8px;
   background-color: var(--black);
@@ -71,11 +78,4 @@ export const Button = styled.button`
   @media screen and (min-width: 686px) {
     padding: 1rem;
   }
-`;
-
-export const Header = styled.section`
-  display: flex;
-  justify-content: center;
-  margin-top: 35px;
-  margin-bottom: 15px;
 `;

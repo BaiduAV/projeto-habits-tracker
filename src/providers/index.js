@@ -1,12 +1,15 @@
 import { GroupProvider } from "./Group";
+import { HabitsProvider } from "./Habits";
 import { UserProvider } from "./User"
 
 export const Providers = ({ children }) => {
     return (
         <UserProvider>
-            <GroupProvider>
-                {children}
-            </GroupProvider>
+            <HabitsProvider>
+                <GroupProvider>
+                    {children}
+                </GroupProvider>
+            </HabitsProvider>
         </UserProvider>
     )
 };

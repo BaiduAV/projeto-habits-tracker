@@ -47,7 +47,8 @@ export const Image = styled.img`
 `;
 
 export const GroupContainer = styled.div`
-  width: 60%;
+  width: 70vw;
+  height: 92vh;
   display: flex;
   flex-direction: column;
   align-items: center;

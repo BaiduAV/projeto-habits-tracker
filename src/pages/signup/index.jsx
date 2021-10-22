@@ -2,13 +2,24 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomizedInput from "../../components/CustomizedInput";
-import { ButtonContainer, ContainerTitle, MainContainer } from "./styles";
+import {
+  ButtonContainer,
+  ContainerTitle,
+  MainContainer,
+  ImageContainer,
+  Container,
+  FormContainer,
+} from "./styles";
 import CustomButton from "../../components/Button";
-import api from "../../services/api";
-import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router";
+import api from "../../services/api";
+import background from "../../assets/signup.svg";
 
 export const Signup = () => {
+
+  const history = useHistory();
+
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido!").required("Campo obrigatório"),
@@ -26,8 +37,6 @@ export const Signup = () => {
       .required("Campo obrigatório"),
   });
 
-  const history = useHistory();
-
   const {
     register,
     handleSubmit,
@@ -35,28 +44,24 @@ export const Signup = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleForm = ({username, email, password}) => {
-    const user = {username, email, password}
-    console.log(user)
+    const user = { username, password, email}
     api
       .post("/users/", user)
       .then((response) => {
-          toast.success("Conta criada com sucesso!");
-          return history.push("/login");
+          toast.success("Conta criada com sucesso!")
+          return history.push("/login")
       })
-      .catch((err) => {
-          toast.error("Erro ao criar a conta! Verifique suas credenciais e tente novamente.")
-      });
+      .catch((err) => toast.error("Erro ao cadastrar, verifique novamente!"))
   };
 
   return (
     <MainContainer>
-      <ContainerTitle>
-        <h3>Signup</h3>
-      </ContainerTitle>
-      <form onSubmit={handleSubmit(handleForm)}>
-          <ButtonContainer>
-            <CustomButton type="submit"/>
-          </ButtonContainer>
+      <ImageContainer style={{ backgroundImage: `url(${background})` }} />
+      <Container>
+        <ContainerTitle>
+          <h3>Signup</h3>
+        </ContainerTitle>
+        <FormContainer onSubmit={handleSubmit(handleForm)}>
           <CustomizedInput
             label="Nome"
             placeholder="Nome"
@@ -92,7 +97,11 @@ export const Signup = () => {
             error={errors.confirmPassword?.message}
             register={register}
           />
-      </form>
+          <ButtonContainer>
+            <CustomButton type="submit" />
+          </ButtonContainer>
+        </FormContainer>
+      </Container>
     </MainContainer>
   );
 };

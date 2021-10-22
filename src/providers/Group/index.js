@@ -1,70 +1,78 @@
 import { createContext, useContext } from "react";
 import api from "../../services/api";
-import { useUser } from "../User";
 
-export const GroupContext = createContext([])
+export const GroupContext = createContext([]);
 
 export const GroupProvider = ({ children }) => {
+  const token = JSON.parse(localStorage.getItem("@Tracker:Token")) || "";
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  console.log(config);
 
-    const { auth } = useUser();
+  const enterAGroup = (id) => {
+    api
+      .post(`/groups/${id}/subscribe`, config)
+      .then((response) => response.data)
+      .catch((err) => console.log(err));
+  };
 
-    const enterAGroup = (id) => {
-        api
-          .post(`/groups/${id}/subscribe`, auth)
-          .then((response) => response.data)
-          .catch((err) => console.log(err));
-      };
-    
-      const exitAGroup = (id) => {
-        api
-          .delete(`/groups/${id}/unsubscribe`, auth)
-          .then((response) => response.data)
-          .catch((err) => console.log(err));
-      };
-    
-      const createActivity = (data) => {
-        api
-          .post("/activities/", auth, data)
-          .then((r) => console.log(r))
-          .catch((err) => console.log(err));
-      };
-    
-      const createGoal = (data) => {
-        api
-          .post("/goals/", auth, data)
-          .then((r) => console.log(r))
-          .catch((err) => console.log(err));
-      };
-    
-      const updateGoal = (data, goalId) => {
-        api
-          .post(`/activities/${goalId}`, auth, data)
-          .then((r) => console.log(r))
-          .catch((err) => console.log(err));
-      };
-    
-      const updateActivity = (data, activityId) => {
-        api
-          .post(`/activities/${activityId}`, auth, data)
-          .then((r) => console.log(r))
-          .catch((err) => console.log(err));
-      };
-      
-      return (
-          <GroupContext.Provider
-            value={{ 
-                enterAGroup, 
-                exitAGroup, 
-                createActivity, 
-                createGoal, 
-                updateGoal, 
-                updateActivity
-            }}
-          >
-              {children}
-          </GroupContext.Provider>
+  const exitAGroup = (id) => {
+    api
+      .delete(`/groups/${id}/unsubscribe`, config)
+      .then((response) => response.data)
+      .catch((err) => console.log(err));
+  };
+
+  const createActivity = (data, id) => {
+    api
+      .post(
+        "/activities/",
+        { ...data, realization_time: "2021-10-23T15:00:00Z", group: id },
+        config
       )
+      .then((r) => console.log(r))
+      .catch((err) => console.log(err));
+  };
 
-}
+  const createGoal = (data, id) => {
+    console.log(data)
+    api
+      .post(
+        "/goals/",
+        { ...data, group: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  };
 
-export const useGroup = () => useContext(GroupContext)
+  const updateGoal = (data, goalId) => {
+    api
+      .post(`/activities/${goalId}`, config, data)
+      .then((r) => console.log(r))
+      .catch((err) => console.log(err));
+  };
+
+  const updateActivity = (data, activityId) => {
+    api
+      .post(`/activities/${activityId}`, config, data)
+      .then((r) => console.log(r))
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <GroupContext.Provider
+      value={{
+        enterAGroup,
+        exitAGroup,
+        createActivity,
+        createGoal,
+        updateGoal,
+        updateActivity,
+      }}
+    >
+      {children}
+    </GroupContext.Provider>
+  );
+};
+
+export const useGroup = () => useContext(GroupContext);

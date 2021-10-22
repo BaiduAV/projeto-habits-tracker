@@ -10,8 +10,8 @@ import { Providers } from "./providers";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Providers>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Providers>
         <GlobalStyle />
         <ToastContainer
           position="top-right"
@@ -25,8 +25,8 @@ ReactDOM.render(
           pauseOnHover
         />
         <App />
-      </BrowserRouter>
-    </Providers>
+        </Providers>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
