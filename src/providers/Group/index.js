@@ -35,8 +35,12 @@ export const GroupProvider = ({ children }) => {
 
   const createGoal = (data, id) => {
     api
-      .post("/goals/", { ...data, group: id }, config)
-      .then((r) => console.log(r))
+      .post(
+        "/goals/",
+        { ...data, group: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => console.log(response))
       .catch((err) => console.log(err));
   };
 

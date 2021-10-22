@@ -46,15 +46,18 @@ export const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const CreatePopup = styled.form`
+export const CreatePopup = styled.section`
   padding: 1rem;
+  margin: 1rem;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   position: fixed;
   z-index: 999;
   width: 70vw;
-  height: 50vw;
+  height: 45vh;
   background: #5712ce;
   border-radius: 5%;
 
@@ -63,7 +66,7 @@ export const CreatePopup = styled.form`
   transition: 0.3 ease-in-out;
   opacity: ${({ search }) => (search ? "100%" : "0")};
   top: ${({ search }) => (search ? "0" : "-100%")};
-  transform: translate(20%, 50%);
+  transform: translate(20%, 55%);
 
   label {
     font-weight: bold;
@@ -74,6 +77,12 @@ export const CreatePopup = styled.form`
     height: 50vh;
     transform: translate(50%, 50%);
   }
+`;
+
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Image = styled.img`
@@ -91,7 +100,6 @@ export const Button = styled.button`
   background-color: var(--black);
   font-size: 18px;
   padding: 0.5rem;
-  margin: -1rem;
   margin-bottom: 20px;
   border: none;
   color: var(--purple);
@@ -104,8 +112,33 @@ export const Button = styled.button`
     color: var(--purple);
     transition: all 0.3s ease-ease-in-out;
   }
-  @media screen and (min-width: 686px) {
+  @media screen and (min-width: 740px) {
     width: 207px;
     padding: 1rem;
+  }
+`;
+
+export const Input = styled.input`
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 200px;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.4375em;
+  background: rgb(243, 246, 249);
+  border: 1px solid #e5e8ec;
+  border-radius: 10px;
+  color: #20262d;
+  transition: width 300ms ease;
+
+  &:hover {
+    background: #eaeef3;
+    border-color: #e5e8ec;
+  }
+
+  &:focus {
+    outline: none;
+    width: 220px;
+    transition: width 200ms ease-out;
   }
 `;
