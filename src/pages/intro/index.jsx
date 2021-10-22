@@ -1,5 +1,6 @@
 import { useHistory } from "react-router";
 import logo from "../../assets/home.svg";
+import { Footer } from "../../components/Footer";
 import {
   Container,
   Logo,
@@ -21,6 +22,7 @@ export const Intro = () => {
   };
 
   return (
+    <>
     <Container>
       <TextContainer>
         <Logo>Kenzie Tracker</Logo>
@@ -49,5 +51,7 @@ export const Intro = () => {
         <Image src={logo} alt="logo" />
       </ImageContainer>
     </Container>
+    <Footer/>
+    </>
   );
 };
